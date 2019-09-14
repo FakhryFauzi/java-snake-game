@@ -13,4 +13,8 @@ public class Field extends JPanel{
     public Field(){
         setBackground(Color.black);
     }
+
+    public void loadImages(){
+        
+    }
 }
