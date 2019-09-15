@@ -37,8 +37,8 @@ public class Field extends JPanel implements ActionListener {
     void createApple() {
         appleY = new Random().nextInt(width / dot_size) * dot_size;
         appleX = new Random().nextInt(width / dot_size) * dot_size;
-        System.out.println(appleY);
-        System.out.println(appleX);
+        // System.out.println(appleY);
+        // System.out.println(appleX);
     }
 
     void initGame() {
@@ -54,7 +54,6 @@ public class Field extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if (inGame) {
-
             checkCollisions();
             checkApple();
             move();
@@ -67,6 +66,7 @@ public class Field extends JPanel implements ActionListener {
     void checkApple() {
         if (x[0] == appleX && y[0] == appleY) {
             dots++; // increase the length of the snake if it hits the apple
+            score++;
             createApple();
         }
     }
@@ -134,6 +134,7 @@ public class Field extends JPanel implements ActionListener {
             g.setColor(Color.white);
             g.setFont(f);
             g.drawString(str, 125, width/2);
+            g.drawString("score: "+score,125,width/2 + 20);
         }
     }
 
