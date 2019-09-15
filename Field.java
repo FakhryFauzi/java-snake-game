@@ -31,6 +31,8 @@ public class Field extends JPanel implements ActionListener {
 
     boolean inGame = true;
 
+    int score = 0;
+
     // Method to generate the apple in a random location
     void createApple() {
         appleY = new Random().nextInt(width / dot_size) * dot_size;
@@ -125,6 +127,13 @@ public class Field extends JPanel implements ActionListener {
             for (int i = 0; i < dots; i++) {
                 g.drawImage(dot, x[i], y[i], this);
             }
+        }else{
+            //want to show game over message if its not showing the snake
+            String str = "Game Over";
+            Font f = new Font("Helvetica",Font.BOLD,14);
+            g.setColor(Color.white);
+            g.setFont(f);
+            g.drawString(str, 125, width/2);
         }
     }
 
@@ -135,6 +144,7 @@ public class Field extends JPanel implements ActionListener {
         initGame();
         addKeyListener((KeyListener) new FieldKeyListener());
         setFocusable(true);
+        setPreferredSize(new Dimension(345,345));
     }
 
     public void loadImages() {
