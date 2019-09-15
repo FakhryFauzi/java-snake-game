@@ -2,10 +2,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Random;
 
 //add field to the java program
-public class Field extends JPanel implements ActionListener{
+public class Field extends JPanel implements ActionListener {
 
     int width = 320;
     int dot_size = 16;
@@ -19,8 +22,8 @@ public class Field extends JPanel implements ActionListener{
     int[] y = new int[field_size];
     int dots;
 
-    boolean left = true;
-    boolean right = false;
+    boolean left = false;
+    boolean right = true;
     boolean up = false;
     boolean down = false;
 
@@ -39,27 +42,33 @@ public class Field extends JPanel implements ActionListener{
             y[i] = 48;
         }
         createApple();
-        timer = new Timer(150,this);
+        timer = new Timer(150, this);
         timer.start();
     }
 
-    public void actionPerformed(ActionEvent e){
+    public void actionPerformed(ActionEvent e) {
         move();
         repaint();
     }
 
-    void move(){
-        if(left){
+    void move() {
+
+        for (int i = dots; i > 0; i--) {
+            x[i] = x[i - 1];
+            y[i] = y[i - 1];
+        }
+
+        if (left) {
             x[0] = x[0] - dot_size;
         }
-        if(right){
+        if (right) {
             x[0] = x[0] + dot_size;
         }
-        if(up){
-            y[0] = y[0] + dot_size;
-        }
-        if(down){
+        if (up) {
             y[0] = y[0] - dot_size;
+        }
+        if (down) {
+            y[0] = y[0] + dot_size;
         }
     }
 
@@ -76,6 +85,8 @@ public class Field extends JPanel implements ActionListener{
         setBackground(Color.black);
         loadImages();
         initGame();
+        addKeyListener((KeyListener) new FieldKeyListener());
+        setFocusable(true);
     }
 
     public void loadImages() {
@@ -83,5 +94,33 @@ public class Field extends JPanel implements ActionListener{
         apple = appleImage.getImage();
         ImageIcon dotImage = new ImageIcon("dot.png");
         dot = dotImage.getImage();
+    }
+
+    class FieldKeyListener extends KeyAdapter{
+
+        public void keyPressed(KeyEvent e) {
+            int key = e.getKeyCode();
+            
+            if (key == KeyEvent.VK_LEFT && !right) {
+                left = true;
+                up = false;
+                down = false;
+            }
+            if (key == KeyEvent.VK_RIGHT && !left) {
+                right = true;
+                up = false;
+                down = false;
+            }
+            if (key == KeyEvent.VK_UP && !down) {
+                right = false;
+                up = true;
+                left = false;
+            }
+            if (key == KeyEvent.VK_DOWN && !up) {
+                right = false;
+                left = false;
+                down = true;
+            }
+        }
     }
 }
