@@ -1,14 +1,14 @@
 import javax.swing.*;
 
-public class Main extends JFrame{
+public class MainClass extends JFrame{
     public static void main(String[] args) {
-        Main window = new Main();
+        MainClass window = new MainClass();
     }
     
     //Create a window object using the javax.swing plugins in java
     //This will create the game window
     
-    public Main(){
+    public MainClass(){
         add(new Field());
         setTitle("Java Snake Game");
         setLocation(300,500); //set the location within the screen
