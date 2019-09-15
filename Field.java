@@ -37,6 +37,9 @@ public class Field extends JPanel implements ActionListener {
     void createApple() {
         appleY = new Random().nextInt(width / dot_size) * dot_size;
         appleX = new Random().nextInt(width / dot_size) * dot_size;
+
+        //TODO - make apple appear not in the same location as the snake
+         
         // System.out.println(appleY);
         // System.out.println(appleX);
     }
