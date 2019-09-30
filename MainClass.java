@@ -13,6 +13,7 @@ public class MainClass extends JFrame{
         setTitle("Java Snake Game");
         setLocation(300,500); //set the location within the screen
         setSize(340, 380); //set the size of the window
+        setResizable(false); // does not allow the window to be resized
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
     }
